@@ -5,13 +5,9 @@ weight: 80
 
 # Support manual
 
-## Common tasks
-
-## AWS
-
-## PaaS
-
-## Manual register updates
+## How to
+- [Manage DNS Records](/manual/manage-dns-records.html)
 
 ## Reference
-- [Environments](/manual/environments)
+- [Environment reference](/manual/environments.html)
+- [Email reference](/manual/email.html)

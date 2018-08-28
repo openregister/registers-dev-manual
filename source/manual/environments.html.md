@@ -8,8 +8,8 @@ ORJ has test environments and production environments.
 
 Within each environment registers are deployed in two configurations:
 
-- **basic** hosts the registers register (the catalog of official registers) and the fields register
-- **multi** hosts all the other registers in that environment
+- **basic** hosts the registers register (the catalog of official registers), the fields register, and the data type register
+- **multi** hosts all the other registers
 
 ### Test
 Test is automatically deployed everytime a PR is merged to master.
@@ -28,4 +28,4 @@ After you merge a PR, you need to manually approve the deploy in AWS Code Pipeli
 ## Registers frontend
 Registers frontend has a production environment and a research environment.
 
-The research environment can be used for testing.
+PRs are automatically deployed to production when merged. The research environment can also be used for testing.
