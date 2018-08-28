@@ -14,3 +14,11 @@ gem 'govuk_tech_docs'
 # Overrride middleman-search with our fork.
 # See: https://github.com/manastech/middleman-search/pull/24
 gem 'middleman-search', :git => "git://github.com/alphagov/middleman-search.git"
+
+gem 'github-markdown'
+gem 'html-pipeline'
+gem 'redcarpet', '~> 3.3.2'
+gem 'commonmarker'
+
+gem 'faraday-http-cache', '~> 2.0.0'
+gem 'faraday_middleware', '~> 0.12.2'
