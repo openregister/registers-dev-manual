@@ -36,6 +36,7 @@ class ExternalDoc
       HeadingFilter,
       AbsoluteLinkFilter,
       MarkdownLinkFilter,
+      ReplaceH1WithH2
     ]
 
     HTML::Pipeline
@@ -114,6 +115,15 @@ class ExternalDoc
 
   # Any other H1s should be considered H2s
   class ReplaceH1WithH2 < HTML::Pipeline::Filter
+    def call
+      doc.css('h1').each do |node|
+        h2 = doc.document.create_element("h2", node.attributes)
+        h2.inner_html = node.inner_html
+        node.replace(h2)
+      end
+
+      doc
+    end
   end
 
   # This adds a unique ID to each header element so that we can reference
