@@ -1,8 +1,10 @@
 # Registers dev manual
 
-👉 https://registers-dev-manual.cloudapps.digital
+👉 https://registers-dev-manual.cloudapps.digital [NOT LIVE YET]
 
-A manual for developers working on GOV.UK Registers.
+A manual for developers working on GOV.UK Registers, to document how to support our production infrastructure.
+
+This is still a work in progress. In the meantime see the [deployment repository](https://github.com/openregister/deployment).
 
 ## Getting started
 
