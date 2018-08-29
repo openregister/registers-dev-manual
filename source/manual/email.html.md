@@ -20,6 +20,9 @@ Users can unsubscribe using the link in their email. This takes them to the mail
 ## Credentials
 There is a mailchimp API key and a team account stored in the [pass credentials](https://github.com/openregister/credentials).
 
+## API integration
+Registers frontend integrates with the mailchimp API to add users to lists. The list ID can be found on the list name and defaults page. It's different to the ID shown in the URL.
+
 ## Removing a user's data
 If users request their data to be removed, mailchimp will contact us and we will need to [delete and remove the contact within 30 days](https://mailchimp.com/help/delete-contacts/).
 
