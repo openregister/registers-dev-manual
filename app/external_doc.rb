@@ -7,7 +7,7 @@ class ExternalDoc
   def self.fetch(repository:, path:, exclude_headings: [])
     contents = HTTP.get(
       "https://raw.githubusercontent.com/#{repository}/master/#{path}",
-    )
+    ).force_encoding(Encoding::UTF_8)
 
     context = {
       # Turn off hardbreaks as they behave different to github rendering
@@ -32,12 +32,11 @@ class ExternalDoc
     filters = [
       HTML::Pipeline::MarkdownFilter,
       HTML::Pipeline::AbsoluteSourceFilter,
-      PrimaryHeadingFilter,
+      SurroundingContextFilter,
       HeadingFilter,
       AbsoluteLinkFilter,
       MarkdownLinkFilter,
       ReplaceH1WithH2,
-      ExcludeRespoitoryInfoFilter
     ]
 
     HTML::Pipeline
@@ -106,15 +105,6 @@ class ExternalDoc
     end
   end
 
-  # Removes the H1 from the page so that we can choose our own title
-  class PrimaryHeadingFilter < HTML::Pipeline::Filter
-    def call
-      first_h1 = doc.at('h1:first-of-type')
-      first_h1.unlink unless first_h1.nil?
-      doc
-    end
-  end
-
   # Any other H1s should be considered H2s
   class ReplaceH1WithH2 < HTML::Pipeline::Filter
     def call
@@ -153,24 +143,51 @@ class ExternalDoc
     end
   end
 
-  class ExcludeRespoitoryInfoFilter < HTML::Pipeline::Filter
+  class SurroundingContextFilter < HTML::Pipeline::Filter
+    def headings
+      %w(h1 h2 h3 h4 h5)
+    end
+
+    def heading_level(node_name)
+      case node_name
+      when "h1"
+        2 # We're going to pretend h1 is actually h2, so we remove intro text, but not subheadings
+      when "h2"
+        2
+      when "h3"
+        3
+      when "h4"
+        4
+      when "h5"
+        5
+      else
+        6 # includes non-headings
+      end
+    end
+
+    def remove_section(from_node)
+      section_level = heading_level(from_node.name)
+
+      sibling = from_node.next_sibling
+
+      until sibling.nil? || heading_level(sibling.name) <= section_level
+        next_sibling = sibling.next_sibling
+        sibling.remove
+        sibling = next_sibling
+      end
+
+      from_node.remove
+    end
+
     def call
-      doc.at('p:first-of-type').unlink
-
-      headings = %w(h1 h2 h3 h4 h5)
-
       doc.css(*headings).each do |node|
         if node.text =~ /licen[cs]e/i
-          sibling = node.next_sibling
-          node.remove
-
-          until sibling.nil? || headings.include?(sibling.name)
-            next_sibling = sibling.next_sibling
-            sibling.remove
-            sibling = next_sibling
-          end
+          remove_section(node)
         end
       end
+
+      first_h1 = doc.at('h1:first-of-type')
+      remove_section(first_h1) unless first_h1.nil?
 
       doc
     end
