@@ -4,7 +4,7 @@ host: https://registers-dev-manual.cloudapps.digital
 # Header-related options
 show_govuk_logo: false
 service_name: GOV.UK Registers developer manual
-service_link: https://registers-dev-manual.cloudapps.digital
+service_link: https://registers-dev-manual.cloudapps.digital/
 phase: Internal
 
 # Links to show on right-hand-side of header
