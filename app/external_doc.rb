@@ -4,7 +4,7 @@ require 'uri'
 require_relative 'http'
 
 class ExternalDoc
-  def self.fetch(repository:, path:)
+  def self.fetch(repository:, path:, exclude_headings: [])
     contents = HTTP.get(
       "https://raw.githubusercontent.com/#{repository}/master/#{path}",
     )
@@ -36,7 +36,8 @@ class ExternalDoc
       HeadingFilter,
       AbsoluteLinkFilter,
       MarkdownLinkFilter,
-      ReplaceH1WithH2
+      ReplaceH1WithH2,
+      ExcludeRespoitoryInfoFilter
     ]
 
     HTML::Pipeline
@@ -108,7 +109,8 @@ class ExternalDoc
   # Removes the H1 from the page so that we can choose our own title
   class PrimaryHeadingFilter < HTML::Pipeline::Filter
     def call
-      doc.at('h1:first-of-type').unlink
+      first_h1 = doc.at('h1:first-of-type')
+      first_h1.unlink unless first_h1.nil?
       doc
     end
   end
@@ -144,6 +146,29 @@ class ExternalDoc
 
         if node.children.first
           node[:id] = id
+        end
+      end
+
+      doc
+    end
+  end
+
+  class ExcludeRespoitoryInfoFilter < HTML::Pipeline::Filter
+    def call
+      doc.at('p:first-of-type').unlink
+
+      headings = %w(h1 h2 h3 h4 h5)
+
+      doc.css(*headings).each do |node|
+        if node.text =~ /licen[cs]e/i
+          sibling = node.next_sibling
+          node.remove
+
+          until sibling.nil? || headings.include?(sibling.name)
+            next_sibling = sibling.next_sibling
+            sibling.remove
+            sibling = next_sibling
+          end
         end
       end
 

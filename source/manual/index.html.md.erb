@@ -1,0 +1,15 @@
+---
+title: "Support manual"
+---
+
+# Support manual
+
+## How to
+<% manual.howto_pages.each do |manual_page| %>
+- [<%= manual_page.data.title %>](/<%= manual_page.path %>)
+<% end %>
+
+## Reference
+<% manual.reference_pages.each do |manual_page| %>
+- [<%= manual_page.data.title %>](/<%= manual_page.path %>)
+<% end %>
