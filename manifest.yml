@@ -2,5 +2,5 @@
 applications:
 - name: registers-dev-manual
   memory: 64M
-  path: ./build
+  instances: 2
   buildpack: staticfile_buildpack
