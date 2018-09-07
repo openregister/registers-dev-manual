@@ -1,10 +1,10 @@
 # Registers dev manual
 
-👉 https://registers-dev-manual.cloudapps.digital [NOT LIVE YET]
+👉 https://registers-dev-manual.cloudapps.digital
 
 A manual for developers working on GOV.UK Registers, to document how to support our production infrastructure.
 
-This is still a work in progress. In the meantime see the [deployment repository](https://github.com/openregister/deployment).
+Please add stuff that helps us do things.
 
 ## Getting started
 
@@ -89,3 +89,6 @@ the HTML and asset files ready to be published.
 
 [rvm]: https://www.ruby-lang.org/en/documentation/installation/#managers
 [bundler]: http://bundler.io/
+
+## Deploy
+To deploy changes to the PaaS, you'll need to set up cloud foundry and run `cf push` from the root of the project. The site is hosted in the openregister sandbox space.
