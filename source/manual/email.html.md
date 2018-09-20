@@ -27,5 +27,6 @@ Registers frontend integrates with the mailchimp API to add users to lists. The 
 If users request their data to be removed, mailchimp will contact us and we will need to [delete and remove the contact within 30 days](https://mailchimp.com/help/delete-contacts/).
 
 ## See also
+- [Troubleshoot email](/manual/troubleshoot-email.html)
 - [Manage DNS records](/manual/manage-dns-records.html)
 - [ADR: Use an external service for email](https://github.com/openregister/registers-frontend/blob/master/doc/adr/0002-external-service-for-email.md)
