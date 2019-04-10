@@ -14,9 +14,9 @@ For information on integrating with GOV.UK registers, see the [GOV.UK registers 
 ### The registers specification
 - [specification](https://github.com/openregister/specification) is the current version of the registers specification
 - [registers-rfcs](https://github.com/openregister/registers-rfcs) contains RFCs (requests for comments). This is the process we use to change the specification.
+- [conformance-test](https://github.com/openregister/conformance-test) is the test suite to verify a hosted register conforms with the specification.
 
 ### GOV.UK Registers
 - [registers-frontend](https://github.com/openregister/registers-frontend) serves [registers.service.gov.uk](https://registers.service.gov.uk)
 - [openregister-java](https://github.com/openregister/openregister-java) is the reference implementation of the Registers specification. It serves the API for GOV.UK registers.
 - [registers-tech-docs](https://github.com/alphagov/registers-tech-docs) serves the API documentation for GOV.UK Registers
-- [managing-registers](https://github.com/openregister/managing-registers) is a tool for custodians to update GOV.UK registers
