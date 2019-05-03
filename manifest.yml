@@ -3,5 +3,6 @@ applications:
 - name: registers-dev-manual
   memory: 64M
   instances: 2
+  stack: cflinuxfs3
   buildpack: staticfile_buildpack
   path: build
