@@ -24,7 +24,13 @@ Ask somebody to create you accounts for:
 ## 3. Deploy a change
 Our CI is hosted on travis: [travis-ci.org/openregister](https://travis-ci.org/openregister).
 
-Registers frontend will automatically deploy to production on merge.
+Registers frontend will automatically deploy to production on merge to
+master. Be aware that we don't pin the `ruby_buildpack` version used
+to build the project so the [latest version from
+PaaS](https://github.com/alphagov/paas-cf/commits/master/config/buildpacks.yml)
+will be used up by Travis and that can sometimes be a cause of issues
+as dependencies evolve. See an example on this [GitHub
+issue](https://github.com/openregister/registers-frontend/issues/667).
 
 Openregister Java will automatically deploy to test on merge. You need to approve the release in AWS code pipeline to release to production.
 
